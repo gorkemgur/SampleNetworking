@@ -9,16 +9,31 @@ import Foundation
 
 protocol ApiProtocol {
     var session: URLSession { get }
-    func fetch<T: Codable>(type: T.Type, with request: URLRequest) async throws -> T
+    func fetch<T: Decodable, T1: Encodable>(type: T.Type, with request: URLRequest, body: T1?) async throws -> T
 }
 
 extension ApiProtocol {
-    func fetch<T: Codable>(type: T.Type, with request: URLRequest) async throws -> T {
-        let (data, response) = try await session.data(for: request)
+    
+    func fetch<T: Decodable, T1: Encodable>(type: T.Type, with request: URLRequest, body: T1?) async throws -> T {
+        
+        var newUrlRequest: URLRequest = request
+        
+        if let body = body {
+            do {
+                newUrlRequest.httpBody = try JSONEncoder().encode(body)
+            } catch {
+                print("Error encoding HTTP body: \(error)")
+                throw ApiError.responseUnsuccessful(description: "Status code: Body Convert Error")
+            }
+        }
+        
+        let (data, response) = try await session.data(for: newUrlRequest)
+        
         guard let httpResponse = response as? HTTPURLResponse else {
             throw ApiError.requestFailed(description: "Invalid response")
         }
-        guard httpResponse.statusCode == 200 else {
+        
+        guard (200...299).contains(httpResponse.statusCode) else {
             throw ApiError.responseUnsuccessful(description: "Status code: \(httpResponse.statusCode)")
         }
         

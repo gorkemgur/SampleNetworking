@@ -5,44 +5,20 @@ protocol URLRequestBuilder {
     var path: String { get }
     var httpMethod: HTTPMethod { get }
     var headers: [String: String] { get }
-    func makeURLRequest<T: Codable>(with requestBody: T?) -> URLRequest?
+    var urlRequest: URLRequest { get }
 }
 
 extension URLRequestBuilder {
     var baseURL: String { "google.com" }
-    var headers: [String: String] { [:] }
-    var path: String { "" }
-    
-    func makeURLRequest<T: Codable>(with requestBody: T?) -> URLRequest? {
-        guard var urlComponents = URLComponents(string: baseURL) else {
-            print("Error creating URL components")
-            return nil
-        }
-        urlComponents.path = path
-        urlComponents.scheme = "https"
-        
-        guard let url = urlComponents.url else {
-            print("Error creating URL")
-            return nil
-        }
-        
-        var request = URLRequest(url: url)
-        request.httpMethod = httpMethod.rawValue
-        request.allHTTPHeaderFields = headers
-        
-        if let requestBody = requestBody {
-            do {
-                request.httpBody = try JSONEncoder().encode(requestBody)
-            } catch {
-                print("Error encoding HTTP body: \(error)")
-                return nil
-            }
-        }
-        
-        return request
+    var headers: [String: String] {
+        var headers: [String: String] = [:]
+        headers["Content-Type"] = "application/json"
+        return headers
     }
     
-    func buildURLRequest() -> URLRequest {
+    var path: String { "" }
+    
+    var urlRequest: URLRequest {
         guard var urlComponents = URLComponents(string: baseURL + path) else {
             fatalError("Invalid URL")
         }
@@ -61,7 +37,7 @@ extension URLRequestBuilder {
     }
 }
 
-enum HTTPMethod: String, Codable {
+enum HTTPMethod: String, Encodable {
     case get = "GET"
     case post = "POST"
     case put = "PUT"

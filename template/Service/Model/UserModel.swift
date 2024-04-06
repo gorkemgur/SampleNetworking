@@ -7,15 +7,14 @@
 
 import Foundation
 
-struct UserModel: URLRequestBuilder, Codable {
-    var httpMethod: HTTPMethod = .get
-    var path: String = UserPaths.login.rawValue
-    
+struct UserModel: Decodable {
     var userName: String?
     var userEmail: String?
     
-    var req: URLRequest {
-        return buildURLRequest()
-    }
+}
+
+struct UserRequest: URLRequestBuilder, Encodable {
     
+    var httpMethod: HTTPMethod = .get
+    var path: String = UserPaths.login.rawValue
 }

@@ -16,6 +16,7 @@
 		EECBECDC2BC1852B003D9D31 /* URLRequestBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECBECDB2BC1852B003D9D31 /* URLRequestBuilder.swift */; };
 		EECBECDE2BC187B3003D9D31 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECBECDD2BC187B3003D9D31 /* UserModel.swift */; };
 		EECBECE02BC18C76003D9D31 /* UserPaths.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECBECDF2BC18C76003D9D31 /* UserPaths.swift */; };
+		EECBECE32BC1FFB9003D9D31 /* NetworkRoutes.swift in Sources */ = {isa = PBXBuildFile; fileRef = EECBECE22BC1FFB9003D9D31 /* NetworkRoutes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		EECBECDB2BC1852B003D9D31 /* URLRequestBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLRequestBuilder.swift; sourceTree = "<group>"; };
 		EECBECDD2BC187B3003D9D31 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		EECBECDF2BC18C76003D9D31 /* UserPaths.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPaths.swift; sourceTree = "<group>"; };
+		EECBECE22BC1FFB9003D9D31 /* NetworkRoutes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRoutes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +77,7 @@
 		EECBECC72BC17D95003D9D31 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				EECBECE12BC1FFAB003D9D31 /* Paths */,
 				EECBECDA2BC18514003D9D31 /* Protocol */,
 				EECBECD22BC17F35003D9D31 /* Manager */,
 				EECBECC82BC17D9A003D9D31 /* Enum */,
@@ -114,6 +117,14 @@
 				EECBECDB2BC1852B003D9D31 /* URLRequestBuilder.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		EECBECE12BC1FFAB003D9D31 /* Paths */ = {
+			isa = PBXGroup;
+			children = (
+				EECBECE22BC1FFB9003D9D31 /* NetworkRoutes.swift */,
+			);
+			path = Paths;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +199,7 @@
 			files = (
 				EECBECB82BC17D35003D9D31 /* ViewController.swift in Sources */,
 				EECBECDE2BC187B3003D9D31 /* UserModel.swift in Sources */,
+				EECBECE32BC1FFB9003D9D31 /* NetworkRoutes.swift in Sources */,
 				EECBECB42BC17D35003D9D31 /* AppDelegate.swift in Sources */,
 				EECBECE02BC18C76003D9D31 /* UserPaths.swift in Sources */,
 				EECBECD92BC184DB003D9D31 /* APIError.swift in Sources */,
